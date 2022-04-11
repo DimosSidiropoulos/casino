@@ -1,8 +1,17 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/draw">Live Draw</router-link>
-    <button @click="signOut">Logout</button>
+  <nav class="bg-gray-300">
+    <div class="flex items-center justify-between py-6 font-bold">
+      <div>
+        <router-link class="hover:text-red-500 mx-5" to="/">Home</router-link>
+        <router-link class="hover:text-red-500 mx-1.5" to="/draw"
+          >Live Draw</router-link
+        >
+      </div>
+      <button class="hover:text-red-500 mx-5 font-bold" @click="signOut">
+        <i class="fa-solid fa-user"></i>
+        Logout
+      </button>
+    </div>
   </nav>
 </template>
 

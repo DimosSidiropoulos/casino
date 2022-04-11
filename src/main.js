@@ -5,6 +5,7 @@ import store from "./store";
 import axios from "axios";
 
 import { initializeApp } from "firebase/app";
+import './assets/tailwind.css'
 
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;

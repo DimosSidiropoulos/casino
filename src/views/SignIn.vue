@@ -1,7 +1,7 @@
 <template>
   <div>
     <form @submit.prevent="pressed">
-      Register
+      Sign in
       <div class="email">
         <input
           type="email"
@@ -18,14 +18,14 @@
           placeholder="password"
         />
       </div>
-      <button type="submit">Register</button>
+      <button type="submit">Sign In</button>
       <br />
       <span
         >Need an account? Click here to
         <router-link to="/Register">Register</router-link></span
       >
     </form>
-    <div v-if="error"></div>
+    <div v-if="error">{{ error }}</div>
   </div>
 </template>
 
@@ -45,7 +45,7 @@ export default {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, this.email, this.password)
         .then(() => {
-          this.$router.push({ name: "Draw" });
+          this.$router.push({ name: "Home" });
         })
         .catch((error) => {
           this.error = error;

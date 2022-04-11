@@ -21,6 +21,10 @@
       <button type="submit">Register</button>
     </form>
     <div v-if="error">{{ error.message }}</div>
+    <div v-if="success">
+      Successfully registered, please go ahead and
+      <router-link to="/SignIn">Sign In</router-link>
+    </div>
   </div>
 </template>
 
@@ -32,6 +36,7 @@ export default {
       email: "",
       password: "",
       error: "",
+      success: false,
     };
   },
   methods: {
@@ -39,7 +44,8 @@ export default {
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, this.email, this.password)
         .then(() => {
-          this.$router.push({ name: "Draw" });
+          //this.$router.push({ name: "Home" });
+          this.success = true;
         })
         .catch((error) => {
           this.error = error;
