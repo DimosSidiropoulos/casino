@@ -56,6 +56,7 @@
 
 <script>
 import Header from "../components/Header.vue";
+import { mapActions } from "vuex";
 
 export default {
   name: "Home",
@@ -68,7 +69,13 @@ export default {
       max: false,
     };
   },
+  watch: {
+    numbersPicked: {
+      handler: "check",
+    },
+  },
   methods: {
+    ...mapActions(["addNumbers"]),
     picked(number) {
       if (this.numbersPicked.includes(number)) {
         alert("you have picked this number already");
@@ -81,6 +88,7 @@ export default {
       }
     },
     reroute() {
+      this.addNumbers([...this.numbersPicked]);
       this.$router.push("Draw");
     },
     test(number) {
@@ -88,6 +96,14 @@ export default {
       // this.numbersPicked == number;
       //});
       this.numbersPicked.splice(this.numbersPicked.indexOf(number), 1);
+      console.log(this.numbersPicked);
+    },
+    check() {
+      if (this.numbersPicked.length < 6) {
+        this.max = false;
+      } else {
+        this.max = true;
+      }
     },
   },
 };
