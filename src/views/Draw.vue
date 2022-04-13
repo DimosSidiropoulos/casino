@@ -1,6 +1,7 @@
 <template>
   <div>
     <Header />
+    <Modal :earnings="earnings"> </Modal>
     <h1 class="text-4xl font-normal mt-4 mb-2 text-green-500 font-bold">
       Draw
     </h1>
@@ -20,7 +21,7 @@
             text-white
             font-bold
           "
-          :class="winner ? 'win' : ''"
+          :class="getNumbers.includes(number) ? 'bg-green-600' : ''"
         >
           {{ number }}
         </div>
@@ -46,11 +47,15 @@
       </div>
     </div>
     <div v-if="winCount > 2">Κέρδισες</div>
+    <div class="text-2xl font-bold fixed bottom-0 right-0 mr-10 mb-5">
+      Money: <span>{{ earnings }}</span>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from "../components/Header.vue";
+import Modal from "../components/Header.vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -59,6 +64,7 @@ export default {
       winningNumbers: [],
       test: [],
       winCount: 0,
+      earnings: 0,
     };
   },
   methods: {
@@ -81,6 +87,7 @@ export default {
         this.winningNumbers.push(number);
         console.log(this.winningNumbers);
         this.winner(number);
+        this.earningsCount;
       }
     },
     generateNumber() {
@@ -90,8 +97,24 @@ export default {
       } while (this.winningNumbers.includes(randomNumber));
       return randomNumber;
     },
+    earningsCount() {
+      switch (this.winCount) {
+        case 3:
+          this.earnings = 5;
+          break;
+        case 4:
+          this.earnings = 10;
+          break;
+        case 5:
+          this.earnings = 20;
+          break;
+        default:
+          this.earnings = 0;
+      }
+    },
   },
-  components: { Header },
+
+  components: { Header, Modal },
   mounted() {
     console.log(this.getNumbers),
       setTimeout(() => {
