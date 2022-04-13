@@ -106,5 +106,6 @@ export default {
 
 <style scoped>
 .win {
+  background-color: black;
 }
 </style>
