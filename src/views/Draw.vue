@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <Modal :earnings="earnings"> </Modal>
+    <Modal :earnings="earnings" v-if="completed" />
     <h1 class="text-4xl font-normal mt-4 mb-2 text-green-500 font-bold">
       Draw
     </h1>
@@ -21,7 +21,6 @@
             text-white
             font-bold
           "
-          :class="getNumbers.includes(number) ? 'bg-green-600' : ''"
         >
           {{ number }}
         </div>
@@ -41,6 +40,7 @@
             text-white
             font-bold
           "
+          :class="winningNumbers.includes(number) ? 'bg-green-600' : ''"
         >
           {{ number }}
         </div>
@@ -55,7 +55,7 @@
 
 <script>
 import Header from "../components/Header.vue";
-import Modal from "../components/Header.vue";
+import Modal from "../components/Modal.vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -65,6 +65,7 @@ export default {
       test: [],
       winCount: 0,
       earnings: 0,
+      completed: false,
     };
   },
   methods: {
@@ -88,6 +89,7 @@ export default {
         console.log(this.winningNumbers);
         this.winner(number);
         this.earningsCount;
+        this.completed = true;
       }
     },
     generateNumber() {
@@ -95,6 +97,7 @@ export default {
       do {
         randomNumber = Math.floor(Math.random() * (10 - 1) + 1); //30
       } while (this.winningNumbers.includes(randomNumber));
+      this.earningsCount();
       return randomNumber;
     },
     earningsCount() {
@@ -114,7 +117,10 @@ export default {
     },
   },
 
-  components: { Header, Modal },
+  components: {
+    Header,
+    Modal,
+  },
   mounted() {
     console.log(this.getNumbers),
       setTimeout(() => {
@@ -128,7 +134,4 @@ export default {
 </script>
 
 <style scoped>
-.win {
-  background-color: black;
-}
 </style>

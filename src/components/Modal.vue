@@ -11,7 +11,7 @@ export default {
   props: ["earnings"],
   methods: {
     backHome() {
-      this.$router.push("Home");
+      this.$router.push("/");
     },
   },
 };

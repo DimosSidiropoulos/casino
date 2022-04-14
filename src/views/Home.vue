@@ -1,10 +1,8 @@
 <template>
   <div>
     <Header />
-    <h1 class="text-4xl font-normal mt-4 mb-2 text-green-500 font-bold">
-      Home
-    </h1>
-    <div class="grid grid-cols-2">
+    <h1 class="text-4xl font-normal mt-10 mb-2 font-bold">Home</h1>
+    <div class="grid grid-cols-2 mt-10">
       <div class="grid grid-cols-5">
         <div v-for="number in 30" :key="number">
           <button
@@ -46,9 +44,27 @@
           </button>
         </div>
         <div v-if="this.numbersPicked.length > 4">
-          <button @click="reroute">Submit</button>
+          <button
+            @click="reroute"
+            class="
+              bg-red-500
+              hover:bg-red-600
+              text-white
+              p-2
+              font-bold
+              rounded-lg
+              hover:shadow-md
+              transition
+              duration-200
+              mt-10
+            "
+          >
+            Submit
+          </button>
         </div>
-        <div v-if="max">You cant pick any more numbers</div>
+        <div v-if="max" class="font-bold mt-10">
+          You cant pick any more numbers
+        </div>
       </div>
     </div>
   </div>
@@ -92,9 +108,6 @@ export default {
       this.$router.push("Draw");
     },
     test(number) {
-      // this.numbersPicked.filter((number) => {
-      // this.numbersPicked == number;
-      //});
       this.numbersPicked.splice(this.numbersPicked.indexOf(number), 1);
       console.log(this.numbersPicked);
     },
