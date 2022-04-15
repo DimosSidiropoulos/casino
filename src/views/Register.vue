@@ -69,7 +69,7 @@
         </button>
       </form>
     </div>
-    <div v-if="error">{{ error.message }}</div>
+    <div v-if="error">{{ error }}</div>
     <div v-if="success" class="font-bold mt-5">
       Successfully registered, please go ahead and
       <router-link to="/SignIn"

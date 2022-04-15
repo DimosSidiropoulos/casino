@@ -5,6 +5,7 @@ import store from "./store";
 import axios from "axios";
 
 import { initializeApp } from "firebase/app";
+// import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "./assets/tailwind.css";
 
 Vue.prototype.$axios = axios;
@@ -23,8 +24,14 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
+// const auth = getAuth();
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+
 new Vue({
   router,
   store,
   render: (h) => h(App),
 }).$mount("#app");
+//   }
+// });

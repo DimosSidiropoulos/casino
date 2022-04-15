@@ -3,6 +3,7 @@
     <h1 class="font-bold mt-10 text-4xl">
       Welcome to the <span class="text-red-500">Lottery</span>
     </h1>
+
     <div class="flex justify-center mt-20">
       <form
         @submit.prevent="pressed"
@@ -77,8 +78,8 @@
           </router-link></span
         >
       </form>
-      <div v-if="error">{{ error }}</div>
     </div>
+    <div v-if="error" class="font-bold">{{ error }}</div>
   </div>
 </template>
 
@@ -100,8 +101,8 @@ export default {
         .then(() => {
           this.$router.push({ name: "Home" });
         })
-        .catch((error) => {
-          this.error = error;
+        .catch(() => {
+          this.error = "Incorrect username or password. ";
         });
     },
   },

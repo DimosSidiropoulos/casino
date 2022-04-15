@@ -1,10 +1,8 @@
 <template>
   <div>
     <Header />
-    <Modal :earnings="earnings" v-if="completed" />
-    <h1 class="text-4xl font-normal mt-4 mb-2 text-green-500 font-bold">
-      Draw
-    </h1>
+
+    <h1 class="text-4xl font-normal mt-4 mb-2 font-bold">Draw</h1>
     <div class="grid grid-cols-2">
       <div class="flex">
         <div
@@ -46,9 +44,10 @@
         </div>
       </div>
     </div>
-    <div v-if="winCount > 2">Κέρδισες</div>
+    <div v-if="winCount > 2">Winning Bet</div>
+    <Modal :earnings="earnings" v-if="completed" />
     <div class="text-2xl font-bold fixed bottom-0 right-0 mr-10 mb-5">
-      Money: <span>{{ earnings }}</span>
+      Money: <span>{{ earnings }} $</span>
     </div>
   </div>
 </template>
@@ -66,6 +65,7 @@ export default {
       winCount: 0,
       earnings: 0,
       completed: false,
+      playing: true,
     };
   },
   methods: {
