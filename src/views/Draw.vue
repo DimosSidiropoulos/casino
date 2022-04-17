@@ -1,7 +1,6 @@
 <template>
   <div>
     <Header />
-
     <h1 class="text-4xl font-normal mt-4 mb-2 font-bold">Draw</h1>
     <div class="grid grid-cols-2">
       <div class="flex">
@@ -45,7 +44,13 @@
       </div>
     </div>
     <div v-if="winCount > 2">Winning Bet</div>
-    <Modal :earnings="earnings" v-if="completed" />
+    <Modal
+      :earnings="earnings"
+      :winningNumbers="winningNumbers"
+      :playerBet="getNumbers"
+      :status="status"
+      v-if="completed"
+    />
     <div class="text-2xl font-bold fixed bottom-0 right-0 mr-10 mb-5">
       Money: <span>{{ earnings }} $</span>
     </div>
@@ -66,6 +71,7 @@ export default {
       earnings: 0,
       completed: false,
       playing: true,
+      status: "",
     };
   },
   methods: {
@@ -79,17 +85,23 @@ export default {
           return false;
         }
       });
-      console.log(this.test);
-      console.log(this.winCount);
+      if (this.winCount > 2) {
+        this.status = "Won";
+      } else {
+        this.status = "Lost";
+      }
+      // console.log(this.test);
+      // console.log(this.winCount);
     },
     draw() {
       for (let i = 0; i < 5; i++) {
         let number = this.generateNumber();
         this.winningNumbers.push(number);
-        console.log(this.winningNumbers);
+        // console.log(this.winningNumbers);
         this.winner(number);
         this.earningsCount;
         this.completed = true;
+        console.log(this.winningNumbers);
       }
     },
     generateNumber() {
@@ -122,10 +134,10 @@ export default {
     Modal,
   },
   mounted() {
-    console.log(this.getNumbers),
-      setTimeout(() => {
-        this.draw();
-      }, 3000);
+    // console.log(this.getNumbers),
+    setTimeout(() => {
+      this.draw();
+    }, 3000);
   },
   computed: {
     ...mapGetters({ getNumbers: ["getNumbers"] }),

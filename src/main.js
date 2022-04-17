@@ -5,6 +5,7 @@ import store from "./store";
 import axios from "axios";
 
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 // import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "./assets/tailwind.css";
 
@@ -23,6 +24,10 @@ const firebaseConfig = {
 // Initialize Firebase
 
 initializeApp(firebaseConfig);
+
+const db = getFirestore()
+
+export {db}
 
 // const auth = getAuth();
 // onAuthStateChanged(auth, (user) => {

@@ -7,9 +7,12 @@
         </div>
         <div class="p-6">
           <h1 class="font-bold text-xl">You have won {{ earnings }} $</h1>
+          <!-- <h2>{{ playerBet }}</h2> -->
+          <h2>{{ winningNumbers }}</h2>
         </div>
         <div class="p-6 flex justify-end items-center">
           <button
+            @click="save"
             class="
               bg-red-500
               hover:bg-red-600
@@ -50,14 +53,46 @@
 </template>
 
 <script>
+import { db } from "../main";
+import { addDoc, collection } from "firebase/firestore";
+
 export default {
-  props: ["earnings"],
+  props: ["earnings", "winningNumbers", "playerBet", "status"],
   methods: {
     backHome() {
       this.$router.push("/");
     },
+    async save() {
+      console.log(this.winningNumbers);
+      try {
+        const colRef = await addDoc(collection(db, "bets"), {
+          earnings: this.earnings,
+          winningNumbers: this.winningNumbers,
+          playerBet: this.playerBet,
+          status: this.status,
+        });
+        console.log(colRef);
+      } catch (e) {
+        console.error("Error: ", e);
+      }
+    },
   },
 };
+
+//  try {
+//         const colRef = collection(db, "bets");
+//         addDoc(colRef, {
+//           earnings: this.earnings,
+//           winningNumbers: this.winningNumbers,
+//           playerBet: this.playerBet,
+//           status: this.status,
+//           paok: false,
+//         });
+//       } catch (e) {
+//         console.error("error adding document", e);
+//       }
 </script>
+
+
 
 
