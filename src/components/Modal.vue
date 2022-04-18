@@ -7,8 +7,6 @@
         </div>
         <div class="p-6">
           <h1 class="font-bold text-xl">You have won {{ earnings }} $</h1>
-          <!-- <h2>{{ playerBet }}</h2> -->
-          <h2>{{ winningNumbers }}</h2>
         </div>
         <div class="p-6 flex justify-end items-center">
           <button
@@ -71,10 +69,11 @@ export default {
           playerBet: this.playerBet,
           status: this.status,
         });
-        console.log(colRef);
+        console.log(colRef.id);
       } catch (e) {
         console.error("Error: ", e);
       }
+      this.$router.push("/");
     },
   },
 };

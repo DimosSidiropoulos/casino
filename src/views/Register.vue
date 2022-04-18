@@ -62,11 +62,20 @@
             hover:shadow-md
             transition
             duration-200
+            mb-5
           "
           type="submit"
         >
           Register
         </button>
+        <span
+          >Already have an account? Click here to
+          <router-link to="/signIn"
+            ><span class="font-bold text-red-500 hover:text-red-600"
+              >Sign In</span
+            >
+          </router-link></span
+        >
       </form>
     </div>
     <div v-if="error">{{ error }}</div>

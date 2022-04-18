@@ -8,9 +8,14 @@
           >Home</router-link
         >
         <router-link
-          class="hover:text-red-500 trasition duration-300 mx-1.5"
+          class="hover:text-red-500 trasition duration-300 mx-5"
           to="/draw"
           >Live Draw</router-link
+        >
+        <router-link
+          class="hover:text-red-500 trasition duration-300 mx-5"
+          to="/history"
+          >History</router-link
         >
       </div>
       <button

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <h1 class="text-4xl font-normal mt-4 mb-2 font-bold">Draw</h1>
+    <h1 class="text-4xl mt-4 mb-2 font-bold">Draw</h1>
     <div class="grid grid-cols-2">
       <div class="flex">
         <div
@@ -43,7 +43,9 @@
         </div>
       </div>
     </div>
-    <div v-if="winCount > 2">Winning Bet</div>
+    <div v-if="winCount > 2" class="font-bold text-red-500 mt-10">
+      Winning Bet
+    </div>
     <Modal
       :earnings="earnings"
       :winningNumbers="winningNumbers"
@@ -78,7 +80,7 @@ export default {
     winner(number) {
       this.getNumbers.some((r) => {
         if (r == number) {
-          this.test.push(r); //number?
+          this.test.push(r);
           this.winCount++;
           return true;
         } else {
@@ -101,7 +103,6 @@ export default {
         this.winner(number);
         this.earningsCount;
         this.completed = true;
-        console.log(this.winningNumbers);
       }
     },
     generateNumber() {

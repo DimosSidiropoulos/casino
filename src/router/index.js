@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Register from "../views/Register.vue";
 import SignIn from "../views/SignIn.vue";
 import Draw from "../views/Draw.vue";
+import History from "../views/History.vue";
 
 import { getAuth } from "firebase/auth";
 
@@ -14,6 +15,9 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    meta: {
+      authRequired: true,
+    },
   },
   {
     path: "/register",
@@ -33,6 +37,14 @@ const routes = [
       authRequired: true,
     },
   },
+  {
+    path: "/history",
+    name: "History",
+    component: History,
+    meta: {
+      authRequired: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
@@ -42,8 +54,10 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  const auth = getAuth().currentUser;
+
   if (to.matched.some((record) => record.meta.authRequired)) {
-    if (getAuth().currentUser) {
+    if (auth) {
       next();
     } else {
       alert("You must be logged in to see this page");
