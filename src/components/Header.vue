@@ -4,7 +4,7 @@
       <div>
         <router-link
           class="hover:text-red-500 trasition duration-300 mx-5"
-          to="/"
+          to="/home"
           >Home</router-link
         >
         <router-link

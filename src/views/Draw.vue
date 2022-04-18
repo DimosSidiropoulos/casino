@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <h1 class="text-4xl mt-4 mb-2 font-bold">Draw</h1>
+    <h1 class="text-4xl font-normal mt-4 mb-2 font-bold">Draw</h1>
     <div class="grid grid-cols-2">
       <div class="flex">
         <div
@@ -43,9 +43,7 @@
         </div>
       </div>
     </div>
-    <div v-if="winCount > 2" class="font-bold text-red-500 mt-10">
-      Winning Bet
-    </div>
+    <div v-if="winCount > 2">Winning Bet</div>
     <Modal
       :earnings="earnings"
       :winningNumbers="winningNumbers"
@@ -80,7 +78,7 @@ export default {
     winner(number) {
       this.getNumbers.some((r) => {
         if (r == number) {
-          this.test.push(r);
+          this.test.push(r); //number?
           this.winCount++;
           return true;
         } else {
@@ -95,25 +93,29 @@ export default {
       // console.log(this.test);
       // console.log(this.winCount);
     },
-    draw() {
+    async draw(t) {
       for (let i = 0; i < 5; i++) {
+        await t(4000);
         let number = this.generateNumber();
         this.winningNumbers.push(number);
         // console.log(this.winningNumbers);
         this.winner(number);
         this.earningsCount;
-        this.completed = true;
+
+        // console.log(this.winningNumbers);
       }
+      this.completed = true;
     },
     generateNumber() {
       let randomNumber;
       do {
-        randomNumber = Math.floor(Math.random() * (10 - 1) + 1); //30
+        randomNumber = Math.floor(Math.random() * (7 - 1) + 1); //30
       } while (this.winningNumbers.includes(randomNumber));
       this.earningsCount();
       return randomNumber;
     },
     earningsCount() {
+      console.log(this.winCount);
       switch (this.winCount) {
         case 3:
           this.earnings = 5;
@@ -137,7 +139,8 @@ export default {
   mounted() {
     // console.log(this.getNumbers),
     setTimeout(() => {
-      this.draw();
+      const run = (ms) => new Promise((num) => setTimeout(num, ms));
+      this.draw(run);
     }, 3000);
   },
   computed: {
@@ -148,3 +151,6 @@ export default {
 
 <style scoped>
 </style>
+
+
+

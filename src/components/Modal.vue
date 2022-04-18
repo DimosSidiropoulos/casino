@@ -58,7 +58,7 @@ export default {
   props: ["earnings", "winningNumbers", "playerBet", "status"],
   methods: {
     backHome() {
-      this.$router.push("/");
+      this.$router.push("/home");
     },
     async save() {
       console.log(this.winningNumbers);
@@ -73,7 +73,7 @@ export default {
       } catch (e) {
         console.error("Error: ", e);
       }
-      this.$router.push("/");
+      this.$router.push("/home");
     },
   },
 };
