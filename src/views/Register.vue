@@ -104,7 +104,6 @@ export default {
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, this.email, this.password)
         .then(() => {
-          //this.$router.push({ name: "Home" });
           this.success = true;
         })
         .catch((error) => {
@@ -115,5 +114,3 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>

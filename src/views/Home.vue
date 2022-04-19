@@ -109,7 +109,6 @@ export default {
     },
     test(number) {
       this.numbersPicked.splice(this.numbersPicked.indexOf(number), 1);
-      console.log(this.numbersPicked);
     },
     check() {
       if (this.numbersPicked.length < 6) {

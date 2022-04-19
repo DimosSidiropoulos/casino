@@ -78,7 +78,7 @@ export default {
     winner(number) {
       this.getNumbers.some((r) => {
         if (r == number) {
-          this.test.push(r); //number?
+          this.test.push(r);
           this.winCount++;
           this.earningsCount();
           return true;
@@ -105,7 +105,7 @@ export default {
     generateNumber() {
       let randomNumber;
       do {
-        randomNumber = Math.floor(Math.random() * (7 - 1) + 1); //30
+        randomNumber = Math.floor(Math.random() * (30 - 1) + 1);
       } while (this.winningNumbers.includes(randomNumber));
 
       return randomNumber;
@@ -143,8 +143,7 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+
 
 
 

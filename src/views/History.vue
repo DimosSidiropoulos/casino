@@ -50,24 +50,10 @@ export default {
       snapshot.docs.forEach((doc) => {
         this.bets.push({ ...doc.data() });
         this.id = doc.id;
-        console.log(this.id);
       });
     });
-    console.log(this.bets);
-  },
-  methods: {
-    handleDelete() {
-      //   const docRef = doc(db, "bets", bet.id);
-      //   deleteDoc(docRef);
-      //     //   console.log(bet.id);
-      //     console.log(this.bets[0].key);
-      //   console.log(bet);
-      console.log(this.id);
-    },
   },
 };
-// console.log(doc._key.path.segments[6]);
-// console.log(doc.id);
 </script>
 
 
