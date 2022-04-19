@@ -61,7 +61,6 @@ export default {
       this.$router.push("/home");
     },
     async save() {
-      console.log(this.winningNumbers);
       try {
         const colRef = await addDoc(collection(db, "bets"), {
           earnings: this.earnings,
@@ -77,19 +76,6 @@ export default {
     },
   },
 };
-
-//  try {
-//         const colRef = collection(db, "bets");
-//         addDoc(colRef, {
-//           earnings: this.earnings,
-//           winningNumbers: this.winningNumbers,
-//           playerBet: this.playerBet,
-//           status: this.status,
-//           paok: false,
-//         });
-//       } catch (e) {
-//         console.error("error adding document", e);
-//       }
 </script>
 
 

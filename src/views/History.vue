@@ -8,7 +8,8 @@
           m-3
           bg-red-500
           text-white text-xl
-          w-2/4
+          w-1/2
+          md:w-1/4
           inline-block
           p-2
           rounded
@@ -16,12 +17,14 @@
         "
         :class="bet.status == 'Won' ? 'bg-green-600' : ''"
       >
-        Draw numbers: {{ bet.winningNumbers }} | Status: {{ bet.status }} |
-        Total Amount won: {{ bet.earnings }}
-        <i
+        <div>Draw numbers: {{ bet.winningNumbers }}</div>
+        <div>Status: {{ bet.status }}</div>
+        <div>Total Amount won: {{ bet.earnings }}</div>
+
+        <!-- <i
           class="fa-solid fa-circle-xmark float-right cursor-pointer"
           @click="handleDelete(bet)"
-        ></i>
+        ></i> -->
       </div>
     </div>
   </div>
@@ -36,30 +39,36 @@ import { collection, getDocs } from "firebase/firestore";
 export default {
   data() {
     return {
+      id: 0,
       bets: [],
     };
   },
   components: { Header },
   created() {
     const colRef = collection(db, "bets");
-
     getDocs(colRef).then((snapshot) => {
       snapshot.docs.forEach((doc) => {
-        console.log(doc);
         this.bets.push({ ...doc.data() });
+        this.id = doc.id;
+        console.log(this.id);
       });
     });
     console.log(this.bets);
   },
   methods: {
-    handleDelete(bet) {
+    handleDelete() {
       //   const docRef = doc(db, "bets", bet.id);
       //   deleteDoc(docRef);
-      //   //   console.log(bet.id);
-      //   console.log(this.bets[0].key);
-      console.log(bet);
+      //     //   console.log(bet.id);
+      //     console.log(this.bets[0].key);
+      //   console.log(bet);
+      console.log(this.id);
     },
   },
 };
+// console.log(doc._key.path.segments[6]);
+// console.log(doc.id);
 </script>
+
+
 

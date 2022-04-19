@@ -3,7 +3,7 @@
     <Header />
     <h1 class="text-4xl font-normal mt-4 mb-2 font-bold">Draw</h1>
     <div class="grid grid-cols-2">
-      <div class="flex">
+      <div class="md:flex justify-center">
         <div
           v-for="number in winningNumbers"
           :key="number"
@@ -22,7 +22,7 @@
           {{ number }}
         </div>
       </div>
-      <div class="flex">
+      <div class="md:flex justify-center">
         <div
           v-for="number in getNumbers"
           :key="number"
@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <div v-if="winCount > 2">Winning Bet</div>
+    <div v-if="winCount > 2" class="font-bold text-xl mt-5">Winning Bet</div>
     <Modal
       :earnings="earnings"
       :winningNumbers="winningNumbers"
@@ -80,6 +80,7 @@ export default {
         if (r == number) {
           this.test.push(r); //number?
           this.winCount++;
+          this.earningsCount();
           return true;
         } else {
           return false;
@@ -90,19 +91,14 @@ export default {
       } else {
         this.status = "Lost";
       }
-      // console.log(this.test);
-      // console.log(this.winCount);
     },
     async draw(t) {
       for (let i = 0; i < 5; i++) {
         await t(4000);
         let number = this.generateNumber();
         this.winningNumbers.push(number);
-        // console.log(this.winningNumbers);
-        this.winner(number);
-        this.earningsCount;
 
-        // console.log(this.winningNumbers);
+        this.winner(number);
       }
       this.completed = true;
     },
@@ -111,11 +107,10 @@ export default {
       do {
         randomNumber = Math.floor(Math.random() * (7 - 1) + 1); //30
       } while (this.winningNumbers.includes(randomNumber));
-      this.earningsCount();
+
       return randomNumber;
     },
     earningsCount() {
-      console.log(this.winCount);
       switch (this.winCount) {
         case 3:
           this.earnings = 5;
@@ -137,7 +132,6 @@ export default {
     Modal,
   },
   mounted() {
-    // console.log(this.getNumbers),
     setTimeout(() => {
       const run = (ms) => new Promise((num) => setTimeout(num, ms));
       this.draw(run);
