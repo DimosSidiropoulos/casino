@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     numbersPicked: [],
+    ready: false,
   },
   getters: {
     getNumbers(state) {
@@ -15,6 +16,9 @@ export default new Vuex.Store({
   mutations: {
     setNumbers: (state, numbersPicked) => {
       state.numbersPicked = numbersPicked;
+    },
+    setStatus: (state, status) => {
+      state.ready = status;
     },
   },
   actions: {

@@ -7,6 +7,7 @@ import Draw from "../views/Draw.vue";
 import History from "../views/History.vue";
 
 import { getAuth } from "firebase/auth";
+import store from "../store";
 
 Vue.use(VueRouter);
 
@@ -27,7 +28,7 @@ const routes = [
   {
     path: "/signIn",
     name: "SignIn",
-    alias:"/",
+    alias: "/",
     component: SignIn,
   },
   {
@@ -36,6 +37,14 @@ const routes = [
     component: Draw,
     meta: {
       authRequired: true,
+    },
+    beforeEnter: (to, from, next) => {
+      if (store.state.ready == false) {
+        next(false);
+        alert("To enter the live draw you must first pick your numbers");
+      } else {
+        next();
+      }
     },
   },
   {

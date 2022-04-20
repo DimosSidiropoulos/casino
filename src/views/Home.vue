@@ -45,7 +45,7 @@
         </div>
         <div v-if="this.numbersPicked.length > 4">
           <button
-            @click="reroute"
+            @click="submit"
             class="
               bg-red-500
               hover:bg-red-600
@@ -103,7 +103,8 @@ export default {
         }
       }
     },
-    reroute() {
+    submit() {
+      this.$store.commit("setStatus", true);
       this.addNumbers([...this.numbersPicked]);
       this.$router.push("Draw");
     },

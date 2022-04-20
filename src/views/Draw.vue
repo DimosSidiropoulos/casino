@@ -140,6 +140,13 @@ export default {
   computed: {
     ...mapGetters({ getNumbers: ["getNumbers"] }),
   },
+  beforeRouteLeave(to, from, next) {
+    if (!this.completed) {
+      return false;
+    } else {
+      next();
+    }
+  },
 };
 </script>
 
