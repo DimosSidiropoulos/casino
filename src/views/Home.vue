@@ -3,7 +3,7 @@
     <Header />
     <h1 class="text-4xl font-normal mt-10 mb-2 font-bold">Home</h1>
     <div class="grid grid-cols-2 mt-10">
-      <div class="grid grid-cols-4 sm:grid-cols-5">
+      <div class="grid grid-cols-3 sm:grid-cols-5">
         <div v-for="number in 30" :key="number">
           <button
             @click="picked(number)"
@@ -127,7 +127,7 @@ export default {
     }
   },
   beforeRouteLeave(to, from, next) {
-    if (!this.ready) {
+    if (!this.ready & (to.name == "Draw")) {
       alert("To enter the live draw you must first pick your numbers");
       return false;
     } else {
