@@ -8,7 +8,7 @@
           m-3
           bg-red-500
           text-white text-xl
-          w-1/2
+          w-3/4
           md:w-1/4
           inline-block
           p-2
