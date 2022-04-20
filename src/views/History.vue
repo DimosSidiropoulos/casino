@@ -9,7 +9,7 @@
           bg-red-500
           text-white text-xl
           w-4/5
-          md:w-1/4
+          md:w-3/6
           inline-block
           p-2
           rounded
