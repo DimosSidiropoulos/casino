@@ -105,7 +105,7 @@ export default {
     generateNumber() {
       let randomNumber;
       do {
-        randomNumber = Math.floor(Math.random() * (30 - 1) + 1);
+        randomNumber = Math.floor(Math.random() * (10 - 1) + 1);
       } while (this.winningNumbers.includes(randomNumber));
 
       return randomNumber;
