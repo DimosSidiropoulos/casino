@@ -3,7 +3,7 @@
     <Header />
     <h1 class="text-4xl font-normal mt-10 mb-2 font-bold">Home</h1>
     <div class="grid grid-cols-2 mt-10">
-      <div class="grid grid-cols-5">
+      <div class="grid grid-cols-4 md:grid-cols-5">
         <div v-for="number in 30" :key="number">
           <button
             @click="picked(number)"
@@ -83,6 +83,7 @@ export default {
       numbers: [],
       numbersPicked: [],
       max: false,
+      ready: false,
     };
   },
   watch: {
@@ -104,7 +105,8 @@ export default {
       }
     },
     submit() {
-      this.$store.commit("setStatus", true);
+      this.ready = true;
+      console.log(this.ready);
       this.addNumbers([...this.numbersPicked]);
       this.$router.push("Draw");
     },
@@ -118,6 +120,19 @@ export default {
         this.max = true;
       }
     },
+  },
+  computed() {
+    if (this.numbersPicked.length > 4) {
+      this.ready = true;
+    }
+  },
+  beforeRouteLeave(to, from, next) {
+    if (!this.ready) {
+      alert("To enter the live draw you must first pick your numbers");
+      return false;
+    } else {
+      next();
+    }
   },
 };
 </script>
