@@ -49,9 +49,12 @@ export default {
   methods: {
     handleDelete(bet, index) {
       const docRef = doc(db, "bets", bet.id);
-      // alert("Are u sure you want to delete this?");
       this.bets.splice(index, 1);
       deleteDoc(docRef);
+      if (this.bets.length === 0) {
+        this.empty = true;
+      }
+      console.log(this.bets.length);
     },
   },
   created() {
