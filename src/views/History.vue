@@ -17,15 +17,17 @@
         "
         :class="bet.status == 'Won' ? 'bg-green-600' : ''"
       >
+        <i
+          class="fa-solid fa-circle-xmark float-right cursor-pointer"
+          @click="handleDelete(bet, index)"
+        ></i>
         <div>Draw numbers: {{ bet.winningNumbers }}</div>
         <div>Status: {{ bet.status }}</div>
         <div>Total Amount won: {{ bet.earnings }}</div>
-
-        <!-- <i
-          class="fa-solid fa-circle-xmark float-right cursor-pointer"
-          @click="handleDelete(bet)"
-        ></i> -->
       </div>
+    </div>
+    <div v-if="empty" class="mt-10 text-xl text-red-500 font-bold">
+      The History is empty
     </div>
   </div>
 </template>
@@ -34,23 +36,33 @@
 import Header from "../components/Header.vue";
 
 import { db } from "../main";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 
 export default {
   data() {
     return {
-      id: 0,
       bets: [],
+      empty: false,
     };
   },
   components: { Header },
+  methods: {
+    handleDelete(bet, index) {
+      const docRef = doc(db, "bets", bet.id);
+      // alert("Are u sure you want to delete this?");
+      this.bets.splice(index, 1);
+      deleteDoc(docRef);
+    },
+  },
   created() {
     const colRef = collection(db, "bets");
     getDocs(colRef).then((snapshot) => {
       snapshot.docs.forEach((doc) => {
-        this.bets.push({ ...doc.data() });
-        this.id = doc.id;
+        this.bets.unshift({ ...doc.data(), id: doc.id });
       });
+      if (this.bets.length === 0) {
+        this.empty = true;
+      }
     });
   },
 };
