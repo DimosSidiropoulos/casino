@@ -106,7 +106,6 @@ export default {
     },
     submit() {
       this.ready = true;
-      console.log(this.ready);
       this.addNumbers([...this.numbersPicked]);
       this.$router.push("Draw");
     },
