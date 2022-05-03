@@ -68,6 +68,14 @@ export default {
       }
     });
   },
+  beforeRouteLeave(to, from, next) {
+    if (!this.ready & (to.name == "Draw")) {
+      alert("To enter the live draw pick your numbers");
+      return false;
+    } else {
+      next();
+    }
+  },
 };
 </script>
 

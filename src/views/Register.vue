@@ -105,6 +105,7 @@ export default {
       createUserWithEmailAndPassword(auth, this.email, this.password)
         .then(() => {
           this.success = true;
+          this.$router.push({ name: "Home" });
         })
         .catch((error) => {
           this.error = error;
